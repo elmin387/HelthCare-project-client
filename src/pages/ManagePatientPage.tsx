@@ -29,15 +29,6 @@ useEffect(()=>{
   }
 },[params,setPatient])
 
- const refreshPatientData = async () => {
-  try {
-      const response = await fetchPatientById(patient.patientId);
-      setPatient(response.data);
-      initialPatientValue.current = response.data;
-  } catch (error) {
-      console.error("Error refreshing patient data:", error);
-  }
-};
 
   return (
     <div>

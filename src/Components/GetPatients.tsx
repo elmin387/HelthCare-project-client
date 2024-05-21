@@ -1,12 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Patient, PatientsProps } from '../interfaces/PatientInterface'
 import { Link, useNavigate } from 'react-router-dom'
 import { getPatients } from '../services/GetPatientsService'
 import { NAVIGATE } from '../utils/constants'
+import '../Components/GetPatients.css'; // Import your stylesheet
+import ClipLoader from 'react-spinners/ClipLoader'
 
-const GetPatients = ({patients}:PatientsProps) => {
+const GetPatients = ({patients, fetchPatients, loading}:PatientsProps) => {
     const navigate = useNavigate();
+    const [searchName, setSearchName] = useState('');
 
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSearchName(value);
+        fetchPatients(value);
+    };
   return(
     <div>
         <section className='patient-search p-3'>
@@ -24,17 +32,22 @@ const GetPatients = ({patients}:PatientsProps) => {
                     </div>
                     <div className="row">
                         <div className="col-md-6">
-                            <form action="" className='row'>
+                            <form  className='row'>
                                 <div className="col">
                                     <div className="mb-2">
                                         <input type="text"
+                                        name='patientName'
+                                        value={searchName}
                                         className='form-control'
+                                        onChange={handleInputChange}
                                         placeholder='Search Patients' />
                                     </div>
                                 </div>
                                 <div className="col">
                                     <div className="mb-2">
                                         <input type="submit"
+                                        name='patientName'
+                                        value='Search'
                                         className='btn btn-outline-dark' />
                                     </div>
                                 </div>
@@ -44,7 +57,9 @@ const GetPatients = ({patients}:PatientsProps) => {
                 </div>
             </div>
         </section>
-        <section>
+        {loading ? <div className="loading">
+                    <ClipLoader size={50} color={"#123abc"} loading={loading} />
+                </div> : (<section>
             <table className='table'>
                 <thead>
                     <tr>
@@ -67,7 +82,7 @@ const GetPatients = ({patients}:PatientsProps) => {
                     ))}
                 </tbody>
             </table>
-        </section>
+        </section>)}
     </div>
   )
 }

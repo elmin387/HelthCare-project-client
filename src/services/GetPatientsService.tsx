@@ -3,7 +3,9 @@ import { Patient, PatientManageProps, PatientRequest } from "../interfaces/Patie
 import { customAxios } from "../axios/axios";
 import { API_PATHS } from "../utils/constants";
 
+//const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 export const getPatients = async (obj?:PatientRequest):Promise<AxiosResponse> =>{
+    //await delay(2000);
     return customAxios.get(API_PATHS.PATIENTS,{
         params:{
             PatientId:obj?.patientId,
@@ -22,3 +24,11 @@ export const createPatient = (patient:Patient):Promise<AxiosResponse>=>{
     console.log("Sending patient data", patient);
     return customAxios.post(API_PATHS.NEWPATIENT,patient)
 }
+
+export const debounce = (func: (...args: any[]) => void, wait: number) => {
+    let timeout: NodeJS.Timeout;
+    return (...args: any[]) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), wait);
+    };
+};

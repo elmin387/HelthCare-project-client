@@ -22,4 +22,6 @@ export type Patient = {
 
   export type PatientsProps = {
     patients: Patient[]
+    fetchPatients: (name: string) => void
+    loading: boolean
   }

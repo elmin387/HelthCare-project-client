@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import { Patient, PatientManageProps } from '../interfaces/PatientInterface'
+import { PatientManageProps } from '../interfaces/PatientInterface'
 import { createPatient, updatePatientById } from '../services/GetPatientsService';
 import { useNavigate } from 'react-router-dom';
-import { NAVIGATE } from '../utils/constants';
+import { API_PATHS, NAVIGATE } from '../utils/constants';
+import DeleteModal from '../Modals/DeleteModal';
 
 const ManagePatient = ({patient, params, setPatient, initialPatientValue}:PatientManageProps) => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const ManagePatient = ({patient, params, setPatient, initialPatientValue}:Patien
         event.preventDefault();
         if(params.patientId) {updatePatientById(patient,params.patientId)} else{createPatient(patient)}
             
-            navigate(NAVIGATE.PATIENTS);
+            navigate(NAVIGATE.PATIENTS,{state:{updated:true}});
     }
    
 
@@ -38,6 +39,7 @@ const ManagePatient = ({patient, params, setPatient, initialPatientValue}:Patien
         return setisView(true)
     }
   return (
+    <div>
     <section className='add-patient p-3'>
         <div className="container">
             <div className="row">
@@ -100,7 +102,8 @@ const ManagePatient = ({patient, params, setPatient, initialPatientValue}:Patien
                             {!isView || !params.patientId ? (<button className='btn btn-primary' type='submit'>
                                 Save
                             </button>) : null}
-                            {!isView ? (<button className='btn btn-primary ms-2' type='button'>
+                            {!isView ? (<button className='btn btn-danger ms-2' type='button' data-bs-toggle='modal'
+                                        data-bs-target='#modal'>
                                 Delete
                             </button>) : null}
                             {isView || params.patientId  ? (<button className='btn btn-primary ms-2' type='button' onClick={!isView ? cancelEdit : ()=>navigate(NAVIGATE.PATIENTS)}>
@@ -112,6 +115,8 @@ const ManagePatient = ({patient, params, setPatient, initialPatientValue}:Patien
             </div>
         </div>
         </section>
+        <DeleteModal id={patient.patientId} tableName={API_PATHS.PATIENT}/>
+        </div>
     );
 };
 

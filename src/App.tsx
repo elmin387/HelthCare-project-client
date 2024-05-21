@@ -6,6 +6,7 @@ import GetPatientPage from './pages/ManagePatientPage';
 import GetPatientsPage from './pages/GetPatientsPage';
 import ManagePatient from './Components/ManagePatient';
 import ManagePatientPage from './pages/ManagePatientPage';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
