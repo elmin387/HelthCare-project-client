@@ -22,8 +22,8 @@ const[patient, setPatient]=useState<Patient>(initialPatient)
 useEffect(()=>{
   if(params.patientId !==null) {
     fetchPatientById(params.patientId)
-    .then((response)=>{setPatient(response.data)
-      initialPatientValue.current=response.data;
+    .then((response)=>{setPatient(response.data.item)
+      initialPatientValue.current=response.data.item;
       
     });
   }

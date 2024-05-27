@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Patient } from '../interfaces/PatientInterface'
-import { debounce, getPatients } from '../services/GetPatientsService'
+import { debounce,  } from '../services/CommonServices'
 import GetPatients from '../Components/GetPatients'
 import { useLocation } from 'react-router-dom'
+import { getPatients } from '../services/GetPatientsService'
 
 const GetPatientsPage = () => {
     const[patients, setPatients] = useState<Patient[]>([])

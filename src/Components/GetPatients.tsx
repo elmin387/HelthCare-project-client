@@ -11,7 +11,8 @@ const GetPatients = ({patients, fetchPatients, loading}:PatientsProps) => {
     const [searchName, setSearchName] = useState('');
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
+        const{name,value}=event.target;
+        console.log(event.target.value)
         setSearchName(value);
         fetchPatients(value);
     };
@@ -22,7 +23,8 @@ const GetPatients = ({patients, fetchPatients, loading}:PatientsProps) => {
                 <div className="grid">
                     <div className="row">
                         <div className="col">
-                            <p className="h3">
+                            
+                            <p className="h3"><button className='btn btn-primary mx-2 float-start' onClick={()=>navigate(NAVIGATE.HOME)}>Back</button>
                                 Patient List
                                 <button onClick={()=>navigate(NAVIGATE.PATIENTS_MANAGE,{state:{patientId:null}})} className='btn btn-primary ms-2'>
                                     New
@@ -77,7 +79,7 @@ const GetPatients = ({patients, fetchPatients, loading}:PatientsProps) => {
                             <td>{patient.patientName}</td>
                             <td>{patient.address}</td>
                             <td>{patient.telephone}</td>
-                            <td>{patient.gender==0 ? "Male" : "Female"}</td>
+                            <td>{patient.gender==0 ? "Male" : (patient.gender==1) ? "Female" : "Unknown"}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -25,10 +25,4 @@ export const createPatient = (patient:Patient):Promise<AxiosResponse>=>{
     return customAxios.post(API_PATHS.NEWPATIENT,patient)
 }
 
-export const debounce = (func: (...args: any[]) => void, wait: number) => {
-    let timeout: NodeJS.Timeout;
-    return (...args: any[]) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), wait);
-    };
-};
+

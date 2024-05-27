@@ -6,11 +6,13 @@ export const HomePage = () => {
     const buttonStyle = {
         top:'50px',
         left:'50px',
-        marginTop:'20px'
+        marginTop:'20px',
+        marginLeft:'20px'
     }
-  return (
+  return (<div>
     <Link to="/patients"><button type="button" className="btn btn-primary" style={buttonStyle}>Patients</button></Link>
-    
+    <Link to="/doctors"><button type="button" className="btn btn-primary" style={buttonStyle}>Doctors</button></Link>
+    </div>
 
   )
 }
