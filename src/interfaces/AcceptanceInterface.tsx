@@ -1,0 +1,35 @@
+import { MutableRefObject, SetStateAction } from "react"
+
+export type Acceptance ={
+        patientAcceptanceId:number,
+        dateTimeOfAcceptance:string,
+        patientId:number,
+        patientName:string,
+        doctorId:number,
+        doctorName:string,
+        doctorCode:string,
+        urgentAcceptance:boolean
+    }
+
+export type AcceptanceProps ={
+        acceptances:Acceptance[]
+        fetchedAcceptances:(fromDate:string,toDate:string)=>void
+        loading:boolean
+
+    }
+
+export type AcceptanceRequest={
+    patientAcceptanceId?: number
+    name?: string
+    fromDate?: string
+    toDate?: string
+    pageSize?: number
+}
+
+export type AcceptanceManageProps = {
+    acceptance:Acceptance
+    params: Acceptance
+    setAcceptance: (value: SetStateAction<Acceptance>) => void
+    initialAcceptanceValue: MutableRefObject<Acceptance>
+    
+  }

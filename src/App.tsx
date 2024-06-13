@@ -9,6 +9,8 @@ import ManagePatientPage from './pages/ManagePatientPage';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import GetDoctorsPage from './pages/GetDoctorsPage';
 import ManageDoctorPage from './pages/ManageDoctorPage';
+import GetAcceptancesPage from './pages/GetAcceptancesPage';
+import ManageAcceptancePage from './pages/ManageAcceptancePage';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path='/patients/manage' element={<ManagePatientPage />}/>
           <Route path='/doctors' element={<GetDoctorsPage />} />
           <Route path='/doctors/manage' element={<ManageDoctorPage />} />
+          <Route path='/acceptances' element={<GetAcceptancesPage />} />
+          <Route path='/acceptances/manage' element={<ManageAcceptancePage />} />
           </Routes>
       </Router>
   );

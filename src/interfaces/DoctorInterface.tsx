@@ -10,9 +10,7 @@ export type Doctor ={
 
 export type DoctorProps ={
         doctors:Doctor[]
-        handleInputChange: (e:React.ChangeEvent<HTMLInputElement>)=>void
-        searchFormSubmit:(e:React.FormEvent<HTMLFormElement>)=>void
-        searchName:string
+        fetchedDoctors:(name:string)=>void
         loading:boolean
 
     }

@@ -12,6 +12,7 @@ export const HomePage = () => {
   return (<div>
     <Link to="/patients"><button type="button" className="btn btn-primary" style={buttonStyle}>Patients</button></Link>
     <Link to="/doctors"><button type="button" className="btn btn-primary" style={buttonStyle}>Doctors</button></Link>
+    <Link to="/acceptances"><button type="button" className="btn btn-primary" style={buttonStyle}>Acceptances</button></Link>
     </div>
 
   )

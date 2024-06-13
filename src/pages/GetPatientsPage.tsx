@@ -13,7 +13,8 @@ const GetPatientsPage = () => {
     const fetchPatients = useCallback(
         debounce((searchName: string = '') => {
             setLoading(true);
-            getPatients({ name: searchName }).then((response) => {
+            getPatients({ name: searchName })
+            .then((response) => {
                 setPatients(response.data.data);
                 setLoading(false);
             });
@@ -21,15 +22,15 @@ const GetPatientsPage = () => {
         []
     );
 
-    useEffect(() => {
-        fetchPatients();
-    }, []);
+    // useEffect(() => {
+    //     fetchPatients();
+    // }, []);
 
-    useEffect(()=>{
-        getPatients().then((response)=>{
-            setPatients(response.data.data)
-        })
-    },[])
+    // useEffect(()=>{
+    //     getPatients().then((response)=>{
+    //         setPatients(response.data.data)
+    //     })
+    // },[])
     useEffect(() => {
         fetchPatients(location.state?.patientName || '');
     }, [location.state]);

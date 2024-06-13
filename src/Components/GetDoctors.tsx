@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { NAVIGATE } from '../utils/constants';
 import { Doctor, DoctorProps } from '../interfaces/DoctorInterface';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-const GetDoctors = ({doctors, searchName, handleInputChange,searchFormSubmit, loading}: DoctorProps) => {
-    
+const GetDoctors = ({doctors,fetchedDoctors, loading}: DoctorProps) => {
+    const[searchName, setSearchName]=useState('')
     const navigate = useNavigate();
+    const handleInputChange =(event:ChangeEvent<HTMLInputElement>)=>{
+        const{name,value}=event.target;
+        setSearchName(value);
+        fetchedDoctors(value);
+    }
   return (
     <div>
         <section className='doctor-search p-3'>
@@ -24,7 +29,7 @@ const GetDoctors = ({doctors, searchName, handleInputChange,searchFormSubmit, lo
                     </div>
                     <div className="row">
                         <div className="col-md-6">
-                            <form  className='row' onSubmit={searchFormSubmit}>
+                            <form  className='row'>
                                 <div className="col">
                                     <div className="mb-2">
                                         <input type="text"

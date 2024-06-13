@@ -6,7 +6,7 @@ import { Doctor, DoctorRequest } from "../interfaces/DoctorInterface";
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 export const GetDoctorsList= async(obj:DoctorRequest):Promise<AxiosResponse>=>{ 
     //await delay(2000);
-    return customAxios.get(API_PATHS.DOCTORS,{
+    return await customAxios.get(API_PATHS.DOCTORS,{
         params:{
             doctorId:obj?.doctorId,
             name:obj?.name,
@@ -15,7 +15,7 @@ export const GetDoctorsList= async(obj:DoctorRequest):Promise<AxiosResponse>=>{
     })}; 
 
 export const fetchDoctorById= async(id:number):Promise<AxiosResponse>=>{
-    return customAxios.get(API_PATHS.DOCTOR+id);
+    return await customAxios.get(API_PATHS.DOCTOR+id);
 }
 
 export const updateDoctorById = async(doctor:Doctor, id:number):Promise<AxiosResponse>=>{

@@ -12,7 +12,7 @@ const GetPatients = ({patients, fetchPatients, loading}:PatientsProps) => {
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const{name,value}=event.target;
-        console.log(event.target.value)
+        //console.log(event.target.value)
         setSearchName(value);
         fetchPatients(value);
     };
