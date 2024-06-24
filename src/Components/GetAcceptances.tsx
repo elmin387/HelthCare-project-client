@@ -1,9 +1,10 @@
     import React, { ChangeEvent, useEffect, useState } from 'react'
     import { useNavigate } from 'react-router-dom';
-    import { GetAcceptanceList } from '../services/GetAcceptancesService';
+    import { GetAcceptanceList, fetchAcceptanceById } from '../services/GetAcceptancesService';
     import { Acceptance, AcceptanceProps } from '../interfaces/AcceptanceInterface';
     import { NAVIGATE } from '../utils/constants';
     import ClipLoader from 'react-spinners/ClipLoader';
+
 
     const GetAcceptances = ({acceptances,fetchedAcceptances, loading}: AcceptanceProps) => {
         const[searchName, setSearchName]=useState('')
@@ -31,6 +32,7 @@
             const formatedDate = date.toLocaleDateString('en-GB');
             return formatedDate;
         }
+
         return (
             <div>
                 <section className='doctor-search p-3'>
@@ -116,8 +118,7 @@
                         </table>
                     </section>
                 )}
-            </div>
-        );
-    }
-
-    export default GetAcceptances
+    </div>
+  );
+}
+export default GetAcceptances

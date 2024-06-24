@@ -9,6 +9,9 @@ import { Patient } from '../interfaces/PatientInterface';
 import { GetDoctorsList } from '../services/GetDoctorsService';
 import { getPatients } from '../services/GetPatientsService';
 import DateErrorModal from '../Modals/DateCheckModal';
+import ReportModal from './ReportModal';
+import { getReportByAcceptance } from '../services/ReportService';
+import { PatientReportItem } from '../interfaces/ReportInterface';
 
 const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceValue }:AcceptanceManageProps) => {
     const navigate = useNavigate();
@@ -16,6 +19,8 @@ const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceV
     const [doctors, setDoctors] = useState<Doctor[]>([]);
     const [patients, setPatients] = useState<Patient[]>([]);
     const [showDateErrorModal, setShowDateErrorModal] = useState(false);
+    const [showReportModal, setShowReportModal] = useState(false);
+    const [report, setReport] = useState<PatientReportItem | null>(null);
 
     const handleInput=(e:ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
         const { name, value } = e.target;
@@ -30,6 +35,7 @@ const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceV
                 }))
             }
         }
+        
         else if(name==='patientId'){
             const selectedPatient = patients.find(patient=>patient.patientId===parseInt(value))
             if (selectedPatient){
@@ -39,6 +45,13 @@ const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceV
                     patientName:selectedPatient.patientName
                 }))
             }
+        }
+        else if (name === 'urgentAcceptance') {
+            const isUrgent = value === 'true'; 
+            setAcceptance(prevState => ({
+                ...prevState,
+                urgentAcceptance: isUrgent
+            }));
         }
         else {
             setAcceptance(prevState => ({
@@ -66,6 +79,7 @@ const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceV
 
     useEffect(()=>{
         fetchDoctorsAndPatients();
+        fetchReport();
     },[])
 
     const fetchDoctorsAndPatients= async()=>{
@@ -77,14 +91,26 @@ const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceV
         const patientsList = getPatients({});
         setPatients((await patientsList).data.data)
     }
-    
+    const fetchReport = async () => {
+        if (params.patientAcceptanceId) {
+          const data = await getReportByAcceptance(params.patientAcceptanceId);
+          setReport(data || null);
+          console.log(data);
+        } else {
+          setReport(null);
+        }
+      };
     // useEffect(()=>{
     //         setAcceptance((prevState)=>({...prevState,title:0,}))
     //     },[setAcceptance]);
 
     const submitForm=(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        if(params.patientAcceptanceId){updateAcceptanceById(acceptance,acceptance.patientAcceptanceId);console.log(acceptance)} else{createAcceptance(acceptance); }
+        // const acceptanceToSend = {
+        //     ...acceptance,
+        //     urgentAcceptance: acceptance.urgentAcceptance = "true" ? true : false
+        // };
+        if(params.patientAcceptanceId){updateAcceptanceById(acceptance,acceptance.patientAcceptanceId);console.log(acceptance)} else{createAcceptance(acceptance);console.log(acceptance) }
         navigate(NAVIGATE.ACCEPTANCES,{state:{updated:true}})
     }
     
@@ -146,7 +172,7 @@ const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceV
                             disabled={params.patientAcceptanceId ? isView : false}
                             value={acceptance.urgentAcceptance.toString()}
                             onChange={handleInput}><option value="" disabled>Select urgency</option>
-                            <option value="true">Yes</option>
+                            <option value="true">Yes</option>y
                             <option value="false">No</option>
                             </select>
                         </div>
@@ -177,6 +203,16 @@ const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceV
                             </button>) : null}
                         </div>
                     </form>
+                    <div className="col-md-6">
+                <div className="mb-2">
+                  {report ? (
+                    <button className='btn btn-primary' onClick={() => setShowReportModal(true)}>View Report</button>
+                  ) : (
+                    <button className='btn btn-primary' onClick={() => setShowReportModal(true)}>New Patient Report</button>
+                  )}
+                </div>
+              </div>
+                    
                 </div>
             </div>
         </div>
@@ -187,6 +223,13 @@ const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceV
         <DateErrorModal
         show={showDateErrorModal}
         onClose={() => setShowDateErrorModal(false)}
+      />
+      <ReportModal
+        show={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        acceptanceId={acceptance.patientAcceptanceId}
+        onSave={fetchReport}
+        report={report}
       />
         </div>
     );

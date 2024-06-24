@@ -9,7 +9,9 @@ export const API_PATHS = {
     NEWDOCTOR:'/api/doctor',
     ACCEPTANCES: '/api/Acceptance',
     ACCEPTANCE: '/api/Acceptance/',
-    NEWACCEPTANCE:'/api/Acceptance'}
+    NEWACCEPTANCE:'/api/Acceptance',
+    NEWREPORT:'/api/report',
+    GETREPORT:'/api/report'}
     
 
     export const NAVIGATE = {

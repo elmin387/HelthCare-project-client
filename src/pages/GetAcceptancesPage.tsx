@@ -6,9 +6,10 @@ import { GetAcceptanceList } from '../services/GetAcceptancesService';
 import GetAcceptances from '../Components/GetAcceptances';
 
 const GetAcceptancesPage = () => {
-    const location = useLocation();
+  const location = useLocation();
 const[acceptances, setAcceptances] = useState<Acceptance[]>([])
 const [loading, setLoading] =useState(false);
+
 
 const fetchedAcceptances =useCallback(
   debounce((fromDate:string='', toDate:string='')=>{

@@ -33,3 +33,14 @@ export type AcceptanceManageProps = {
     initialAcceptanceValue: MutableRefObject<Acceptance>
     
   }
+  export interface Report {
+    reportDescription: string;
+    // Add other properties as needed
+  }
+
+    export interface PrintPreviewProps {
+        acceptanceData: Acceptance;
+        reportData: Report;
+        onClose: () => void;
+        onDownload: () => void;
+    }
