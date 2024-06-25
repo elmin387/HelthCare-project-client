@@ -21,8 +21,8 @@ export const createReport = async (reportData: PatientReportItem) => {
 //     return axios.get<PatientReportItem>(`${API_PATHS.GETREPORT}/${acceptanceId}`);
 //   };
 
-export const getReportByAcceptance = async (acceptanceId: number): Promise<PatientReportItem | null> => {
+export const getReportByAcceptance = async (acceptanceId: number): Promise<PatientReportItem> => {
   const response = await axios.get(`https://localhost:7048/api/Report/${acceptanceId}`);
-  console.log(response.data);
+  console.log(response.data.item);
   return response.data.item;
 };

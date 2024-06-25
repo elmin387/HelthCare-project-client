@@ -100,16 +100,10 @@ const ManageAcceptances = ({acceptance, params, setAcceptance,initialAcceptanceV
           setReport(null);
         }
       };
-    // useEffect(()=>{
-    //         setAcceptance((prevState)=>({...prevState,title:0,}))
-    //     },[setAcceptance]);
+
 
     const submitForm=(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        // const acceptanceToSend = {
-        //     ...acceptance,
-        //     urgentAcceptance: acceptance.urgentAcceptance = "true" ? true : false
-        // };
         if(params.patientAcceptanceId){updateAcceptanceById(acceptance,acceptance.patientAcceptanceId);console.log(acceptance)} else{createAcceptance(acceptance);console.log(acceptance) }
         navigate(NAVIGATE.ACCEPTANCES,{state:{updated:true}})
     }

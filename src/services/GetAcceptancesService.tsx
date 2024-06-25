@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { customAxios } from "../axios/axios";
 import { API_PATHS, API_URL } from "../utils/constants";
 import { Doctor, DoctorRequest } from "../interfaces/DoctorInterface";
@@ -17,9 +17,18 @@ export const GetAcceptanceList= async(obj:AcceptanceRequest):Promise<AxiosRespon
         }
     })}; 
 
-export const fetchAcceptanceById= async(id:number):Promise<AxiosResponse>=>{
-    return customAxios.get(API_PATHS.ACCEPTANCE+id);
-}
+// export const fetchAcceptanceById= async(id:number):Promise<AxiosResponse>=>{
+//     return customAxios.get(API_PATHS.ACCEPTANCE+id);
+// }
+export const fetchAcceptanceById = async (id: number): Promise<AxiosResponse<any>> => {
+  try {
+      const response = await customAxios(API_PATHS.ACCEPTANCE + id);
+      return response;  // Return the AxiosResponse object
+  } catch (error) {
+      console.error('Error fetching acceptance details:', error);
+      throw error;  // Rethrow the error to be caught by the caller
+  }
+};
 
 export const updateAcceptanceById = async(acceptance:Acceptance, id:number):Promise<AxiosResponse>=>{console.log(acceptance)
     return customAxios.put(API_PATHS.ACCEPTANCE+ id, acceptance)

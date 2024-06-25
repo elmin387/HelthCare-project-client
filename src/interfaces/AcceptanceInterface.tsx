@@ -13,8 +13,10 @@ export type Acceptance ={
 
 export type AcceptanceProps ={
         acceptances:Acceptance[]
+        acceptance?:Acceptance
         fetchedAcceptances:(fromDate:string,toDate:string)=>void
         loading:boolean
+        reportData?:Report
 
     }
 
@@ -34,6 +36,7 @@ export type AcceptanceManageProps = {
     
   }
   export interface Report {
+    dateTimeofReport:string
     reportDescription: string;
     // Add other properties as needed
   }
