@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { Register } from '../../interfaces/AuthInterface';
 import { CLIENT_CONFIRMATION_MAIL_URI, STATUS_CODES, STATUS_TYPES } from '../../utils/constants';
 import { emailConfirmation, registerUser } from '../../services/AuthService';
+import './LoginForm.css';
 
 const RegisterForm = () => {
     const[loading, setLoading] = useState<boolean>();
@@ -63,8 +64,9 @@ const RegisterForm = () => {
     
       
   return (
+    <div className='form-bg'>
     <form onSubmit={handleSubmit(submitForm)}>
-      <div className='form-bg'>
+      
         <div className='container-fluid'>
           <div className='row'>
             <div className='form-wrapper'>
@@ -152,8 +154,8 @@ const RegisterForm = () => {
             </div>
           </div>
         </div>
-      </div>
     </form>
+    </div>
   )
 }
 

@@ -1,0 +1,84 @@
+body {
+     /* Nice blue gradient background */
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-bg {
+    background-image: url(/src/HealthCareImages/StockCake-Healthcare\ Mobile\ Technology_1720696098.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .form-icon .form-logo {
+    width: 100px;
+    height: 100px;
+    background-image: url('/src/HealthCareImages/Logo.JPG'); /* Add your logo here */
+    background-size: cover;
+    margin: 0 auto;
+    border-radius: 50%;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c8e3e7;
+  }
+  
+  .form-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    padding-left: 40px;
+  }
+  
+  .btn.signin {
+    background-color: #1e3c72;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn.signin:hover {
+    background-color: #163a62;
+  }
+  
+  .error_message {
+    color: red;
+    font-size: 12px;
+    text-align: left;
+    margin-top: 5px;
+  }
+  
+  .forgot-pass p {
+    color: gray;
+  }
+  
+  .forgot-pass a {
+    color: #1e3c72;
+    text-decoration: underline;
+  }
+  
+  .forgot-pass a:hover {
+    color: #163a62;
+  }

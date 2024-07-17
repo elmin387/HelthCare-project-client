@@ -5,6 +5,7 @@ import { getPatients } from '../services/GetPatientsService'
 import { NAVIGATE } from '../utils/constants'
 import '../Components/GetPatients.css'; // Import your stylesheet
 import ClipLoader from 'react-spinners/ClipLoader'
+import { backgroundImage } from 'html2canvas/dist/types/css/property-descriptors/background-image'
 
 const GetPatients = ({patients, fetchPatients, loading}:PatientsProps) => {
     const navigate = useNavigate();
@@ -63,7 +64,7 @@ const GetPatients = ({patients, fetchPatients, loading}:PatientsProps) => {
                     <ClipLoader size={50} color={"#123abc"} loading={loading} />
                 </div> : (<section>
             <table className='table'>
-                <thead>
+                <thead color=''>
                     <tr>
                         <th>Patient Name</th>
                         <th>Address</th>
